@@ -90,7 +90,7 @@ For mobile development:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Avengers-Limited/CampusLink.gitv2
+git clone [https://github.com/Avengers-Limited/CampusLink.gitv2](https://github.com/Avengers-Limited/CampusLinkv2)
 cd CampusLink
 ```
 
