@@ -253,7 +253,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👥 Team
 
 - **Owner**: Avengers Limited
-- **Repository**: [CampusLink](https://github.com/Avengers-Limited/CampusLink)
+- **Repository**: [CampusLink](https://github.com/Avengers-Limited/CampusLinkv2)
 
 ## 📞 Support
 
