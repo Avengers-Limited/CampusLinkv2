@@ -1,266 +1,302 @@
-# 🎓 CampusLink - University Networking Platform
+# 🎓 CampusLink (CampusLink_v2)
 
-<div align="center">
-  
-  ![CampusLink Logo](https://img.shields.io/badge/CampusLink-v1.0.0-6C63FF?style=for-the-badge)
-  ![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-  ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-  ![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)
+CampusLink is a university-focused networking platform for students to find project teammates, create/join teams, and collaborate. This repository is a monorepo containing a Backend (Express/MongoDB) and a FrontEnd (React Native + Expo) application.
 
-  **A university-exclusive networking platform for students to connect, find project teammates, and collaborate.**
-
-</div>
+This README describes how the project is organized and how to run each part locally. It includes feature highlights, environment examples, database/collection guidance, and tips for local device testing with Expo.
 
 ---
 
-## 📱 About CampusLink
+## Repository layout
 
-CampusLink is a mobile application designed specifically for university students to:
-- 🤝 Connect with fellow students
-- 👥 Find project teammates based on skills and interests
-- 🚀 Create and join collaborative teams
-- 💼 Build meaningful professional relationships
-- 🎯 Discover opportunities that match your skills
+Top-level folders:
 
-## ✨ Features
+- `Backend/` — Express server (Node.js, MongoDB). See `Backend/package.json` for scripts.
+- `FrontEnd/` — React Native app built with Expo. See `FrontEnd/package.json` for scripts.
+- `uploads/` — uploaded files stored by the backend (gitignored)
 
-### 🔐 Authentication
-- Secure email/password authentication
-- University email verification
-- Profile setup and customization
-- Password recovery
+There are also helper scripts at the repository root and `Backend/` for Windows users (for example `start.bat`).
 
-### 🏠 Home Dashboard
-- Personalized greeting and activity feed
-- Quick actions for common tasks
-- Active projects overview
-- Suggested connections based on interests
-- Search functionality for projects and teammates
+## Quick start (recommended)
 
-### 👥 Teams & Projects
-- Browse available teams and projects
-- Filter by category (Development, Design, Marketing, Research, etc.)
-- View team details, members, and open positions
-- Create new teams
-- Join existing teams
-
-### 👤 User Profile
-- Comprehensive profile with bio, major, and year
-- Skills and interests showcase
-- Project and connection statistics
-- Settings and preferences
-- Account management
-
-### 💬 Messaging System
-- Direct messaging between users
-- Group chat creation
-- Real-time communication
-- File sharing capabilities
-
-### 📱 Additional Features
-- Social feed with posts and interactions
-- Lost & Found section
-- Confessions & Polls
-- Help & Support system
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React Native with Expo
-- **Backend**: Supabase (PostgreSQL)
-- **Authentication**: Supabase Auth
-- **Database**: Supabase PostgreSQL
-- **Storage**: Supabase Storage
-- **Navigation**: React Navigation v7
-- **State Management**: React Context API
-
-## 📋 Prerequisites
-
-Before you begin, ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [Expo CLI](https://docs.expo.dev/get-started/installation/)
-- [Git](https://git-scm.com/)
-
-For mobile development:
-- **Android**: [Android Studio](https://developer.android.com/studio) or Expo Go app
-- **iOS**: Xcode (macOS only) or Expo Go app
-
-## 🚀 Getting Started
-
-### 1. Clone the Repository
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/Avengers-Limited/CampusLinkv2.git
-cd CampusLink
+cd CampusLink_v2
 ```
 
-### 2. Install Dependencies
+2. Open two terminals (one for backend, one for frontend).
+
+### Backend (Windows bash / macOS / Linux)
+
+The backend is in `Backend/`. It uses Node.js (>=18) and MongoDB (or a hosted MongoDB URI).
+
+Install dependencies and start the server:
 
 ```bash
+cd Backend
 npm install
-# or
-yarn install
-```
-
-### 3. Set Up Supabase
-
-1. Create a Supabase project at [supabase.com](https://supabase.com)
-2. Set up the database schema (see Database Setup section)
-3. Configure authentication
-4. Get your API credentials
-
-### 4. Configure Environment Variables
-
-1. Create a `.env` file in the project root
-2. Add your Supabase credentials:
-
-```bash
-EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
-EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-### 5. Run the Application
-
-```bash
-# Start the Expo development server
+# start (production-like)
 npm start
 
-# Start with tunnel mode (recommended for testing)
-npm run start:tunnel
-
-# Run on Android
-npm run android
-
-# Run on iOS (macOS only)
-npm run ios
+# or start in development with nodemon (auto-restart)
+npm run dev
 ```
 
-## 📂 Project Structure
+Default host/port configuration is available in `Backend/server-config.json` (auto-generated by the server on startup). The server expects environment variables — see `Backend/.env.example`. The main variables are described below.
 
-```
-CampusLink/
-├── assets/                 # Images, fonts, and other static assets
-├── components/             # Reusable UI components
-├── constants/             
-│   ├── colors.js          # Color palette and theme
-│   └── typography.js      # Typography styles
-├── context/               
-│   └── AuthContext.js     # Authentication context and state
-├── lib/                   
-│   └── supabase.js        # Supabase client configuration
-├── navigation/            
-│   ├── AppNavigator.js    # Main navigation setup
-│   └── MainTabNavigator.js # Bottom tab navigation
-├── screens/               
-│   ├── WelcomeScreen.js   # Welcome/landing screen
-│   ├── LoginScreen.js     # Login screen
-│   ├── RegisterScreen.js  # Registration screen
-│   ├── ProfileSetupScreen.js # Profile setup after registration
-│   ├── HomeScreen.js      # Main dashboard
-│   ├── FeedScreen.js      # Social feed
-│   ├── TeamsScreen.js     # Teams and projects browser
-│   ├── ProfileScreen.js   # User profile screen
-│   ├── ChatScreen.js      # Chat system
-│   └── [other screens...]
-├── utils/                 # Utility functions
-├── App.js                 # Main app component
-├── app.json               # Expo configuration
-├── package.json           # Dependencies and scripts
-└── README.md             # This file
-```
+Notes:
 
-## 🎨 Design System
+- `start` runs `node src/server.js`.
+- `dev` runs `nodemon --ignore server-config.json --ignore uploads/ src/server.js`.
 
-CampusLink follows a modern, clean design language:
+### FrontEnd (Expo)
 
-### Color Palette
-- **Primary**: `#6C63FF` (Purple) - Main brand color
-- **Secondary**: `#FF6584` (Pink) - Accent color
-- **Background**: `#FFFFFF` / `#F8F9FA`
-- **Text**: `#1A1A1A` / `#666666` / `#999999`
+The mobile app is in `FrontEnd/` and uses Expo.
 
-All colors are defined in `constants/colors.js` for easy customization.
-
-## 🔒 Security
-
-- All passwords are securely hashed by Supabase Auth
-- Row Level Security (RLS) policies protect user data
-- API keys are safe to use in the client (anon key is public)
-- Never commit sensitive credentials to version control
-
-## 📝 Database Schema
-
-### Main Tables
-
-1. **profiles**
-   - User profile information
-   - Linked to Supabase Auth users
-   - Stores: name, bio, major, year, skills, etc.
-
-2. **posts**
-   - Social feed posts
-   - User-generated content
-   - Categories and interactions
-
-3. **teams**
-   - Team/project information
-   - Creator, description, category
-   - Open positions tracking
-
-4. **team_members**
-   - Junction table for team membership
-   - User-team relationships
-   - Role management
-
-## 🧪 Testing
+Install dependencies and start Expo:
 
 ```bash
-# Run tests (to be implemented)
-npm test
+cd FrontEnd
+npm install
+npm start        # opens Expo dev tools
+npm run android  # open on Android device/emulator
+npm run ios      # open on iOS (macOS only)
 
-# Run linter
-npm run lint
+# Tunnel mode (useful for device testing across networks)
+npm run start:tunnel
 ```
 
-## 🚧 Roadmap
+Scripts available (from `FrontEnd/package.json`): `start`, `start:tunnel`, `android`, `ios`, and build scripts for EAS.
 
-- [ ] Real-time messaging between team members
-- [ ] Push notifications for team invites
-- [ ] Advanced search and filtering
-- [ ] User recommendations algorithm
-- [ ] Team matching based on skills
-- [ ] Project milestones and task management
-- [ ] In-app chat functionality
-- [ ] File sharing and collaboration tools
-- [ ] Social features (posts, likes, comments)
-- [ ] Event creation and management
-- [ ] Calendar integration
+Configuration: `FrontEnd/server-config.json` contains the `apiBase` (example: `http://192.168.68.210:4000`). Update this to point at your running backend or provide environment-based overrides in the app code.
 
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Team
-
-- **Owner**: Avengers Limited
-- **Repository**: [CampusLink](https://github.com/Avengers-Limited/CampusLinkv2)
-
-## 📞 Support
-
-For support, email support@campuslink.com or join our community discussions.
+Tip for device testing: the backend writes `Backend/server-config.json` (and the repo root `server-config.json`) on startup with the machine IP so the Expo app can auto-detect the correct API base. If you run the backend on a LAN IP, ensure your mobile device is on the same network and use the `apiBase` value in `FrontEnd/server-config.json`.
 
 ---
 
-<div align="center">
-  Made with ❤️ by the CampusLink Team
-</div>
+## Environment and configuration
+
+- Backend uses a `.env` file for secrets. Copy `Backend/.env.example` to `Backend/.env` and update values. Key variables:
+
+- `PORT` — HTTP port (default 4000)
+- `MONGODB_URI` — MongoDB connection string (example: `mongodb://localhost:27017/campuslink`)
+- `JWT_SECRET` — a strong secret used to sign JSON Web Tokens
+- `CORS_ORIGINS` — comma-separated origins allowed for CORS in development
+- `UPLOAD_DIR` — folder used for file uploads (default `uploads`)
+
+- FrontEnd stores API base in `FrontEnd/server-config.json` for local development. Replace `apiBase` with your backend address (use the machine IP if testing on a physical device).
+- FrontEnd stores API base in `FrontEnd/server-config.json` for local development. Replace `apiBase` with your backend address (use the machine IP if testing on a physical device).
+
+Security note: Do not commit sensitive credentials. Keep `.env` files out of version control.
+
+## Useful commands (summary)
+
+- Start backend (prod-like):
+  - `cd Backend && npm start`
+- Start backend (dev):
+  - `cd Backend && npm run dev`
+- Start frontend (Expo):
+  - `cd FrontEnd && npm start`
+- Start frontend on Android:
+  - `cd FrontEnd && npm run android`
+
+If you prefer Windows `*.bat` helpers, there are `start.bat` files in the top-level and `Backend/` that wrap these commands for convenience.
+
+## Features (expanded)
+
+CampusLink contains a broad feature set focused on student collaboration and discovery. The implementation is split between backend REST endpoints and the Expo frontend UI.
+
+- Authentication & Profiles
+
+  - Email/password auth with JWTs
+  - Profile setup: name, bio, major, year, skills, avatar
+  - Password change and recovery endpoints
+
+- Social Feed & Posts
+
+  - Create, edit, delete posts
+  - Likes, shares and comments
+  - Image uploads (stored under `/uploads` and served by the backend)
+
+- Teams & Projects
+
+  - Create/browse projects and teams
+  - Join requests / team membership management
+  - Project roles and basic stats
+
+- Connections & Messaging
+
+  - Connection requests, accept/reject flow
+  - One-to-one messages and conversations (REST-based)
+
+- Stories, Notifications & Real-time UX
+  - Stories feature (image + text) and story views
+  - Notifications (unread counts, mark-as-read)
+  - Note: real-time sockets (WebSockets) are not yet implemented — messages/notifications use REST endpoints.
+
+## Tech stack (accurate)
+
+- Backend: Node.js (>=18), Express, Mongoose (MongoDB), multer (uploads), bcryptjs, jsonwebtoken
+- Frontend: React Native (Expo), React Navigation, AsyncStorage, fetch-based API helper
+- Others: nodemon for dev, morgan for request logging
+
+The frontend dependencies list in `FrontEnd/package.json` also includes `@supabase/supabase-js` — it is present in dependencies but the app's API layer is primarily wired to the backend REST API (see `FrontEnd/lib/api.js`). If you plan to use Supabase features directly from the client, review `FrontEnd/lib/` and update as needed.
+
+## Project structure (detailed)
+
+Top-level
+
+```
+Backend/
+   ├─ src/
+   │   ├─ app.js                # Express app and routes
+   │   ├─ server.js             # server startup, DB connect, server-config writer
+   │   ├─ controllers/          # route handlers
+   │   ├─ models/               # Mongoose models (User, Post, Project...)
+   │   ├─ routes/               # Express routers
+   │   └─ utils/                # helpers (DB connect, env loader, network helpers)
+   ├─ package.json
+   ├─ .env.example
+   └─ server-config.json        # written by server on startup (apiBase, host, port)
+
+FrontEnd/
+   ├─ App.js
+   ├─ lib/
+   │   └─ api.js                # central API helper used by the app
+   ├─ context/                  # AuthContext, etc.
+   ├─ components/
+   ├─ screens/
+   └─ package.json
+
+uploads/                       # stored by backend and served at /uploads
+```
+
+## Database & collections (high level)
+
+The backend uses MongoDB (via Mongoose). Main collections and commonly stored fields:
+
+- `users` / `profiles`
+
+  - \_id, email, passwordHash, name, bio, major, year, skills[], avatar_url, createdAt
+
+- `posts`
+
+  - \_id, authorId, text, images[], likes[], shares, commentsCount, createdAt
+
+- `comments`
+
+  - \_id, postId, authorId, content, createdAt
+
+- `projects` / `teams`
+
+  - \_id, ownerId, title, description, category, roles[], members[], openPositions[], createdAt
+
+- `team_members`
+
+  - modeled as arrays inside `projects` or as junction collection depending on routes
+
+- `messages` / `conversations`
+  - conversationId, participants[], messages[] (senderId, content, read, createdAt)
+
+These are high-level shapes; consult `Backend/src/models/` for exact Mongoose schemas.
+
+## Security
+
+- `JWT_SECRET` signs user tokens; keep it secret and rotate if leaked.
+- Uploaded files are served from `uploads/` — validate filenames and content types when processing uploads.
+- CORS is permissive in development; set `CORS_ORIGINS` in production to specific origins.
+
+## Testing & linting
+
+This project doesn't contain a full test suite yet. Example NPM scripts exist but are placeholders. Recommended next steps:
+
+- Add unit tests for backend routes (Jest + supertest) and small smoke tests for frontend screens.
+- Add an ESLint configuration and a CI job to run lint/tests on PRs.
+
+## Troubleshooting
+
+- Backend doesn't start / DB connection error: make sure `MONGODB_URI` in `Backend/.env` is correct and MongoDB is running.
+- Frontend shows `Cannot connect to backend`: ensure `Backend/server-config.json` has the correct `apiBase` and your device is on the same network. For Android emulator, app falls back to `http://10.0.2.2:4000`.
+
+## Roadmap
+
+- [ ] Real-time messaging (WebSocket / socket.io)
+- [ ] Push notifications
+- [ ] Advanced search & recommendations
+- [ ] Team matching algorithm
+- [ ] CI + tests and linting
+
+## Contributing
+
+1. Fork the repo
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Make changes and include tests/documentation
+4. Push and open a pull request
+
+When opening PRs, include a description, screenshots (if UI), and testing steps.
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE`.
+
+## Support
+
+For questions or to report issues, open an issue in this repository or email `support@campuslink.com`.
+
+---
+
+If you'd like, I can also:
+
+- Add a `Backend/README.md` with step-by-step local DB instructions (including a Docker Compose example),
+- Create `Backend/.env.example` and `FrontEnd/.env.example` (if you want the frontend to use env variables rather than `server-config.json`),
+- Or split the README into per-subproject READMEs (recommended for larger teams).
+
+Tell me which additional artifacts (per-subproject README, env examples, Docker Compose) you want and I'll add them.
+
+## Project structure (high level)
+
+Backend notable files:
+
+- `Backend/src/server.js` — main server entry
+- `Backend/src/app.js` — express app and middleware
+- `Backend/src/controllers/`, `models/`, `routes/`, `middleware/` — server logic
+- `Backend/server-config.json` — development host/port and apiBase example
+
+Frontend notable files:
+
+- `FrontEnd/App.js` — Expo entry
+- `FrontEnd/lib/api.js` — API helper
+- `FrontEnd/context/AuthContext.js` — auth context
+- `FrontEnd/screens/` — app screens
+
+## Testing & linting
+
+There are no formal tests or linter configs enforced across the monorepo yet. Example scripts exist in each package.json (`npm test`, `npm run lint`) but they are placeholders.
+
+## Contributing
+
+Please follow standard GitHub flow:
+
+1. Fork the repository
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Make commits and push
+4. Open a pull request against the `main` branch
+
+When opening PRs, include a short description of the change, related issue (if any), and testing instructions.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+---
+
+If you'd like, I can also:
+
+- Add a minimal `Backend/.env.example` and `FrontEnd/.env.example` (showing required keys),
+- Add a CONTRIBUTING.md with PR checklist,
+- Or split top-level README into `README.md` (overview) + `Backend/README.md` + `FrontEnd/README.md` for more detail.
+
+If you want any of the above, tell me which and I'll implement it.
+
+Made with ❤️ by the CampusLink Team
